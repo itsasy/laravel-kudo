@@ -12,5 +12,11 @@ class Board extends Model
 
     protected $fillable = [
         'title',
+        'worker_id'
     ];
+
+    public function worker()
+    {
+        return $this->belongsTo(Worker::class);
+    }
 }

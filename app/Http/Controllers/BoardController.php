@@ -22,6 +22,7 @@ class BoardController extends Controller
     {
         $board = Board::create([
             'title' => $request->title,
+            'worker_id' => $request->worker_id
         ]);
 
         return response()->json([

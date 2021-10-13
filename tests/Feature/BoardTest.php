@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Board;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,18 +14,21 @@ class BoardTest extends TestCase
     /** @test */
     public function get_all_boards()
     {
+        User::factory()->times(10)->create();
         $boards = Board::factory()->times(10)->create();
 
         $response = $this->get(route('boards.index'));
 
         $response->assertJsonFragment([
             'title' => $boards[0]->title,
+            'worker_id' => $boards[0]->worker_id
         ])->assertStatus(200);
     }
 
     /** @test */
     public function create_a_board()
     {
+        $user = User::factory()->create();
         $board = Board::factory()->raw();
 
         $response = $this->post(route('boards.store'), $board);
@@ -35,6 +39,7 @@ class BoardTest extends TestCase
             'message' => 'Has been created',
             'board' => [
                 'title' => $board['title'],
+                'worker_id' => $user->id
             ],
             'code' => 201
         ])->assertStatus(201);
@@ -43,10 +48,12 @@ class BoardTest extends TestCase
     /** @test */
     public function update_a_board()
     {
+        $workers = User::factory()->times(10)->create();
         $boards = Board::factory()->times(10)->create();
 
         $boardUpdated = [
             'title' => 'Title updated',
+            'worker_id' => $workers[5]->id
         ];
 
         $response = $this->put(route('boards.update', $boards[0]->id), $boardUpdated);
@@ -56,6 +63,7 @@ class BoardTest extends TestCase
             'board' => [
                 'id' => $boards[0]->id,
                 'title' => $boardUpdated['title'],
+                'worker_id' => $boardUpdated['worker_id']
             ], 'code' => 201
 
         ])->assertStatus(201);
@@ -64,12 +72,14 @@ class BoardTest extends TestCase
     /** @test */
     public function delete_a_board()
     {
+        User::factory()->times(10)->create();
         $boards = Board::factory()->times(10)->create();
 
         $response = $this->delete(route('boards.destroy', $boards[0]->id));
 
         $this->assertSoftDeleted('boards', [
-            'id' => $boards[0]->id
+            'id' => $boards[0]->id,
+            'worker_id' => $boards[0]->worker_id
         ]);
 
         $response->assertJson([
