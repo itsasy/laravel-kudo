@@ -6,22 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Board extends Model
+class Publication extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title',
-        'worker_id'
+        'description',
+        'board_id'
     ];
 
-    public function worker()
+    public function board()
     {
-        return $this->belongsTo(Worker::class);
-    }
-
-    public function publications()
-    {
-        return $this->hasMany(Publication::class);
+        return $this->belongsTo(Board::class);
     }
 }

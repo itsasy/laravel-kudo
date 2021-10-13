@@ -22,3 +22,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/boards', \App\Http\Controllers\BoardController::class);
+Route::resource('/publications', \App\Http\Controllers\PublicationController::class)->except(['index', 'show']);
+Route::get('/board-publications/{board}', [\App\Http\Controllers\PublicationController::class, 'show'])->name('board.publications');
