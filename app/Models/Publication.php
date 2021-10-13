@@ -12,11 +12,17 @@ class Publication extends Model
 
     protected $fillable = [
         'description',
-        'board_id'
+        'board_id',
+        'user_id'
     ];
 
     public function board()
     {
         return $this->belongsTo(Board::class);
+    }
+
+    public function publisher()
+    {
+        return $this->belongsTo(User::class);
     }
 }

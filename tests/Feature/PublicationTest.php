@@ -24,7 +24,8 @@ class PublicationTest extends TestCase
         $response->assertJsonFragment([
             'id' => $publications[0]->id,
             'description' => $publications[0]->description,
-            'board_id' => $board->id
+            'board_id' => $board->id,
+            'user_id' => $board->worker_id
         ])->assertStatus(200);
     }
 
@@ -43,7 +44,8 @@ class PublicationTest extends TestCase
             'message' => 'Has been created',
             'publication' => [
                 'description' => $publication['description'],
-                'board_id' => $board->id
+                'board_id' => $board->id,
+                'user_id' => $board->worker_id
             ],
             'code' => 201
         ])->assertStatus(201);
@@ -67,7 +69,8 @@ class PublicationTest extends TestCase
             'publication' => [
                 'id' => $publications[0]->id,
                 'description' => $publicationUpdated['description'],
-                'board_id' => $board->id
+                'board_id' => $board->id,
+                'user_id' => $board->worker_id
             ], 'code' => 201
 
         ])->assertStatus(201);
@@ -84,7 +87,7 @@ class PublicationTest extends TestCase
 
         $this->assertSoftDeleted('publications', [
             'id' => $publications[0]->id,
-            'board_id' => $board->id
+            'board_id' => $board->id,
         ]);
 
         $response->assertJson([

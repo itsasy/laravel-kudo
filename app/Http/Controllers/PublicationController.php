@@ -23,7 +23,8 @@ class PublicationController extends Controller
     {
         $publication = Publication::create([
             'description' => $request->description,
-            'board_id' => $request->board_id
+            'board_id' => $request->board_id,
+            'user_id' => $request->user_id
         ]);
 
         return response()->json([
