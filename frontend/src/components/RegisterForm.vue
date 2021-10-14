@@ -36,7 +36,7 @@
                             class="mr-4"
                             type="submit"
                             dark>
-                            Sign Up
+                            Register
                         </v-btn>
                     </v-card-actions>
                 </v-card>
