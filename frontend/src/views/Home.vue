@@ -1,20 +1,23 @@
 <template>
-    <div id="app">
+    <v-main>
         <Navigation/>
+        <Menu/>
         <ListBoards/>
-    </div>
+    </v-main>
 </template>
 
 <script>
 
 import Navigation from "../components/Navigation";
-import ListBoards from "../components/ListBoards";
+import ListBoards from "../components/Boards/ListBoard";
+import Menu from "../components/Menu";
 
 export default {
     name: "App",
     components: {
         ListBoards,
-        Navigation
+        Navigation,
+        Menu
     }
 };
 </script>

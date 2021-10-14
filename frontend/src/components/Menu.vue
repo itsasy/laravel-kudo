@@ -1,0 +1,47 @@
+<template>
+    <div class="menu-component">
+<!--        <new-board-component
+            :dialog="modalNewBoard"
+            @close="modalNewBoard = false"
+        />-->
+        <v-row>
+            <v-col cols="10">
+              <span class="pointer">
+                Home
+              </span>
+                <span>
+
+                </span>
+            </v-col>
+            <v-col cols="2" class="d-flex justify-end">
+                <v-btn small outlined color="dark">
+                    <v-icon>mdi-plus</v-icon>
+                    New Board
+                </v-btn>
+            </v-col>
+        </v-row>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "Menu"
+}
+</script>
+
+
+<style scoped>
+.menu-component {
+    background: #fff;
+    padding: 20px 75px 20px 75px;
+}
+
+.pointer {
+    cursor: pointer;
+    font-family: museo-sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.375em;
+}
+</style>
+
