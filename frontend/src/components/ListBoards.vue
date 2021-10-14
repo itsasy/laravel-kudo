@@ -10,7 +10,7 @@
                             </p>
                         </v-col>
                         <v-col cols="4" md="4" class="d-flex justify-end">
-                            <v-btn dark depressed color="dark">
+                            <v-btn @click="openModal()" dark depressed color="dark">
                                 <v-icon small class="mr-2">mdi-bulletin-board</v-icon>
                                 View
                             </v-btn>
@@ -65,7 +65,14 @@
 
 <script>
 export default {
-    name: "ListBoards"
+    name: "ListBoards",
+    methods: {
+        openModal() {
+            this.loader = false;
+
+
+        }
+    }
 }
 </script>
 
