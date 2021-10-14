@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import BoardListService from '../services/BoardListService';
+import BoardListService from '../../services/BoardServices';
 
 export default {
     name: "BoardList",

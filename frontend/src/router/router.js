@@ -4,6 +4,7 @@ import Home from "../views/Home";
 import Register from "../views/Register";
 import Login from "../views/Login";
 import ShowBoard from "../views/ShowBoard";
+import CreateBoard from "../components/Boards/CreateBoard";
 
 const router = new VueRouter({
     mode: 'history',
@@ -23,6 +24,10 @@ const router = new VueRouter({
         {
             path: "/board",
             component: ShowBoard
+        },
+        {
+            path: "/createBoard",
+            component: CreateBoard
         }
     ]
 })
