@@ -1,23 +1,27 @@
 <template>
     <div class="menu-component">
-<!--        <new-board-component
-            :dialog="modalNewBoard"
-            @close="modalNewBoard = false"
-        />-->
         <v-row>
             <v-col cols="10">
               <span class="pointer">
-                Home
+                  <router-link :to="'/'">
+                      Home
+                  </router-link>
               </span>
-                <span>
-
-                </span>
+                <span v-if="this.$router.history.current.path !== '/' ">
+                    / Description
+              </span>
             </v-col>
             <v-col cols="2" class="d-flex justify-end">
-                <v-btn small outlined color="dark">
+                <v-btn small outlined color="dark" v-if="this.$router.history.current.path === '/'">
                     <v-icon>mdi-plus</v-icon>
                     New Board
                 </v-btn>
+
+                <v-btn small outlined color="dark" v-else>
+                    <v-icon>mdi-plus</v-icon>
+                    New Kudo
+                </v-btn>
+
             </v-col>
         </v-row>
     </div>

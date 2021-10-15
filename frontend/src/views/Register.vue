@@ -8,7 +8,7 @@
 <script>
 
 import Register from "../components/RegisterForm";
-import Navigation from "../components/Navigation";
+import Navigation from "../components/Home/Navigation";
 export default {
     name: "App",
     components: {

@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div>
         <Navigation/>
         <Menu/>
         <ShowBoard/>
@@ -8,9 +8,9 @@
 
 <script>
 
-import Navigation from "../components/Navigation";
+import Navigation from "../components/Home/Navigation";
 import ShowBoard from "../components/Boards/ShowBoard";
-import Menu from "../components/Menu";
+import Menu from "../components/Home/Menu";
 
 export default {
     name: "App",

@@ -8,9 +8,9 @@
 
 <script>
 
-import Navigation from "../components/Navigation";
+import Navigation from "../components/Home/Navigation";
 import ListBoards from "../components/Boards/ListBoard";
-import Menu from "../components/Menu";
+import Menu from "../components/Home/Menu";
 
 export default {
     name: "App",
