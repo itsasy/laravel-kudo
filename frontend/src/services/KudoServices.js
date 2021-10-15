@@ -14,4 +14,16 @@ export default class KudoServices {
             })
         })
     }
+
+    updateKudo(data) {
+        return new Promise((resolve, reject) => {
+            axios.put('/publications', {
+                description: data.description,
+            }).then(response => {
+                resolve(response);
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    }
 }
