@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('name');
+Route::post('logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
+Route::post('refresh', [\App\Http\Controllers\Auth\AuthController::class, 'refresh'])->name('refresh');
+Route::post('me', [\App\Http\Controllers\Auth\AuthController::class, 'me'])->name('me');
+Route::post('register', [\App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('register');
+Route::resource('/boards', \App\Http\Controllers\BoardController::class);
+Route::resource('/publications', \App\Http\Controllers\PublicationController::class)->except(['index', 'show']);
+Route::get('/board-publications/{board}', [\App\Http\Controllers\PublicationController::class, 'show'])->name('board.publications');
+Route::resource('/workers', \App\Http\Controllers\WorkerController::class)->only(['index']);
