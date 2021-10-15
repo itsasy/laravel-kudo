@@ -13,7 +13,7 @@ class AddWorkerToBoards extends Migration
      */
     public function up()
     {
-        Schema::table('Boards', function (Blueprint $table) {
+        Schema::table('boards', function (Blueprint $table) {
             $table->unsignedBigInteger('worker_id');
             $table->foreign('worker_id')->references('id')->on('users');
         });
