@@ -51,17 +51,11 @@
 
                     <v-card-text>
                         <v-row>
-                            <v-col cols="12" sm="6">
+                            <v-col cols="12">
                                 <v-icon color="green darken-2">mdi-account</v-icon>
-                                Creator:
-                            </v-col>
-                            <v-col cols="12" sm="6">
-                                <v-icon color="green darken-2">mdi-account</v-icon>
-                                Worker: {{ element.worker_id }}
+                                To: {{element.worker.name}}
                             </v-col>
                         </v-row>
-                        <v-icon>mdi-android-messages</v-icon>
-                        POSTS:
                     </v-card-text>
                 </v-card>
             </v-col>
