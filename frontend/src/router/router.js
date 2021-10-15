@@ -13,6 +13,7 @@ const router = new VueRouter({
         {
             path: "/",
             component: Home,
+            name: 'home',
             meta: {
                 requiresAuth: true
             }

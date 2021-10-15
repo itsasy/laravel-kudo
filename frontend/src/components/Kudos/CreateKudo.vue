@@ -61,8 +61,8 @@ export default {
                 board_id: this.$route.params.id,
                 user_id: this.kudoForm.user_id
             })
-            create.then((response) => {
-                return Promise.resolve(response.data)
+            create.then(() => {
+                this.$router.go(this.$router.currentRoute);
             }).catch(() => {
                 return Promise.resolve(false)
             })

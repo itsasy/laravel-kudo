@@ -68,8 +68,8 @@ export default {
                 description: this.boardForm.description,
                 worker_id: this.boardForm.worker_id
             })
-            create.then((response) => {
-                return Promise.resolve(response.data)
+            create.then(() => {
+                this.$router.go(this.$router.currentRoute);
             }).catch(() => {
                 return Promise.resolve(false)
             })
