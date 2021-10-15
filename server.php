@@ -18,4 +18,4 @@ if ($uri !== '/' && file_exists(__DIR__ . '/frontend3' .$uri)) {
     return false;
 }
 
-require_once __DIR__ . '/frontend3/index.php';
+require_once __DIR__ . '/public/index.php';
