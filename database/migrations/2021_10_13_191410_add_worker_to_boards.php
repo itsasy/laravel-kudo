@@ -26,7 +26,7 @@ class AddWorkerToBoards extends Migration
      */
     public function down()
     {
-        Schema::table('Boards', function (Blueprint $table) {
+        Schema::table('boards', function (Blueprint $table) {
             $table->dropForeign('boards_worker_id_foreign');
             $table->dropColumn('worker_id');
         });

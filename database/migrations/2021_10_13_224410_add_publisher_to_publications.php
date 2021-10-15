@@ -26,7 +26,7 @@ class AddPublisherToPublications extends Migration
      */
     public function down()
     {
-        Schema::table('Publications', function (Blueprint $table) {
+        Schema::table('publications', function (Blueprint $table) {
             $table->dropForeign('publications_user_id_foreign');
             $table->dropColumn('user_id');
         });
