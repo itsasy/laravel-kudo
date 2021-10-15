@@ -1,5 +1,5 @@
 <template>
-    <v-main persistent max-width="550px" scrollable>
+    <v-dialog v-model="modal" persistent max-width="550px" scrollable>
         <v-card>
             <v-toolbar color="black" dark class="pa-0">
                 <v-toolbar-title>New KudoBoard</v-toolbar-title>
@@ -31,7 +31,7 @@
             </v-app>
 
         </v-card>
-    </v-main>
+    </v-dialog>
 </template>
 
 <script>
@@ -41,6 +41,19 @@ import WorkerService from "../../services/WorkerServices";
 
 export default {
     name: "CreateBoard",
+    props: {
+        value: Boolean
+    },
+    computed: {
+        modal: {
+            get() {
+                return this.value
+            },
+            set(value) {
+                this.$emit('input', value)
+            }
+        }
+    },
     data() {
         return {
             boardService: new BoardListService,

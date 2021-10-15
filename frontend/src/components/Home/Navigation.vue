@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar color="indigo" dark>
+    <v-app-bar dark>
         <v-toolbar-title class="">KudoBoard</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
