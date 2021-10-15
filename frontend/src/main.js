@@ -7,6 +7,7 @@ import vuetify from "./vuetify/index";
 import router from './router/router'
 
 import App from "./App";
+import store from "./store/store";
 
 Vue.use(VueRouter);
 
@@ -16,4 +17,5 @@ new Vue({
     render: h => h(App),
     vuetify,
     router,
+    store
 }).$mount("#app");

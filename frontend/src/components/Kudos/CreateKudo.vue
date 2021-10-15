@@ -2,7 +2,7 @@
     <v-dialog v-model="modal" persistent max-width="550px" scrollable>
         <v-card>
             <v-toolbar dark class="pa-0">
-                <v-toolbar-title>New KudoBoard</v-toolbar-title>
+                <v-toolbar-title>New Kudo</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn icon @click.stop="modal=false">
                     <v-icon>mdi-close</v-icon>
@@ -11,12 +11,8 @@
 
             <v-card-text>
                 <v-form class="pt-5">
-                    <label>KudoBoard for:</label>
-                    <v-select item-value="id" item-text="name" :items="boardForm.workerList"
-                              v-model="boardForm.worker_id" label="Select" single-line
-                              dense filled rounded></v-select>
-                    <label>Description:</label>
-                    <v-text-field dense filled rounded placeholder="" v-model="boardForm.description"/>
+                    <label>Write your post in this Board:</label>
+                    <v-textarea dense filled rounded placeholder="" v-model="kudoForm.description"/>
                 </v-form>
             </v-card-text>
             <v-card-actions class="d-flex justify-content-end">
@@ -32,11 +28,10 @@
 
 <script>
 
-import BoardListService from '../../services/BoardServices';
-import WorkerService from "../../services/WorkerServices";
+import KudoService from "../../services/KudoServices";
 
 export default {
-    name: "CreateBoard",
+    name: "CreateKudo",
     props: {
         value: Boolean
     },
@@ -52,39 +47,26 @@ export default {
     },
     data() {
         return {
-            boardService: new BoardListService,
-            workerService: new WorkerService,
-            boardForm: {
-                workerList: [],
-
+            kudoService: new KudoService(),
+            kudoForm: {
                 description: '',
-                worker_id: ''
+                user_id: 1
             }
         }
     },
     methods: {
         createBoard() {
-            let create = this.boardService.createBoard({
-                description: this.boardForm.description,
-                worker_id: this.boardForm.worker_id
+            let create = this.kudoService.createKudo({
+                description: this.kudoForm.description,
+                board_id: this.$route.params.id,
+                user_id: this.kudoForm.user_id
             })
             create.then(() => {
                 this.$router.go(this.$router.currentRoute);
             }).catch(() => {
                 return Promise.resolve(false)
             })
-        },
-        getWorkers() {
-            let workerList = this.workerService.getWorkers()
-            workerList.then(response => {
-                this.boardForm.workerList = response.data.workers;
-            }).catch(error => {
-                console.log(error);
-            });
         }
-    },
-    created() {
-        this.getWorkers()
     }
 }
 </script>

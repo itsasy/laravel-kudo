@@ -1,9 +1,9 @@
 <template>
-    <v-main>
+    <div id="app">
         <Navigation/>
         <Menu/>
         <ListBoards/>
-    </v-main>
+    </div>
 </template>
 
 <script>

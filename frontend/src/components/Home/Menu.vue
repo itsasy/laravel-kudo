@@ -12,15 +12,20 @@
               </span>
             </v-col>
             <v-col cols="2" class="d-flex justify-end">
-                <v-btn small outlined color="dark" v-if="this.$router.history.current.path === '/'">
+                <v-btn small outlined color="dark" v-if="this.$router.history.current.path === '/'"
+                       @click.stop="CreateBoard=true">
                     <v-icon>mdi-plus</v-icon>
                     New Board
                 </v-btn>
 
-                <v-btn small outlined color="dark" v-else>
+
+                <v-btn small outlined color="dark" v-else
+                       @click.stop="CreateKudo=true">
                     <v-icon>mdi-plus</v-icon>
                     New Kudo
                 </v-btn>
+                <create-board v-model="CreateBoard"></create-board>
+                <create-kudo v-model="CreateKudo"></create-kudo>
 
             </v-col>
         </v-row>
@@ -28,8 +33,22 @@
 </template>
 
 <script>
+
+import CreateBoard from "../Boards/CreateBoard";
+import CreateKudo from "../Kudos/CreateKudo";
+
 export default {
-    name: "Menu"
+    name: "Menu",
+    data() {
+        return {
+            CreateBoard: false,
+            CreateKudo: false,
+        }
+    },
+    components: {
+        CreateBoard,
+        CreateKudo
+    }
 }
 </script>
 
