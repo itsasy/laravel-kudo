@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/boards', \App\Http\Controllers\BoardController::class);
 Route::resource('/publications', \App\Http\Controllers\PublicationController::class)->except(['index', 'show']);
 Route::get('/board-publications/{board}', [\App\Http\Controllers\PublicationController::class, 'show'])->name('board.publications');
+Route::resource('/workers', \App\Http\Controllers\WorkerController::class)->only(['index']);
