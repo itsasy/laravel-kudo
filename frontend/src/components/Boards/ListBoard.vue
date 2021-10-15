@@ -4,7 +4,7 @@
             You haven't received a KudoBoard yet.
         </v-alert>
 
-        <v-row v-else class=" d-flex justify-content-center">
+        <v-row v-else>
             <v-col v-for="(element, index) in list" :key="index" cols="12" md="4" sm="10">
                 <v-card elevation="2">
                     <v-card-text class="mb-4">
