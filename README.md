@@ -47,3 +47,10 @@ Like JOCA
 user: joca@gmail.com
 password: password
 ~~~
+
+## RUN TEST
+see all in green. In your command prompt run..
+
+~~~
+: php artisan test
+~~~
