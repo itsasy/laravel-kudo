@@ -12,7 +12,7 @@
                    href="/register">
                 Register
             </v-btn>
-            <v-btn @click="logout()" link depressed v-else>
+            <v-btn @click="logout" link depressed v-else>
                 Logout
             </v-btn>
         </v-toolbar-items>
