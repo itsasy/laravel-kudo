@@ -1,6 +1,6 @@
 <template>
     <v-main class="container mt-4">
-        <v-alert v-if="list.length == 0" dense outlined type="info">
+        <v-alert v-if="list.length === 0" dense outlined type="info">
             You haven't received a KudoBoard yet.
         </v-alert>
 
@@ -15,7 +15,7 @@
                                 </p>
                             </v-col>
                             <v-col cols="4" md="4" class="d-flex justify-end">
-                                <v-btn @click="openModal()" dark depressed color="dark">
+                                <v-btn :to="'/board/' + element.id" dark depressed color="dark" link>
                                     <v-icon small class="mr-2">mdi-bulletin-board</v-icon>
                                     View
                                 </v-btn>
@@ -92,9 +92,6 @@ export default {
             }).catch(error => {
                 console.log(error);
             });
-        },
-        openModal() {
-            this.loader = false;
         }
     },
 

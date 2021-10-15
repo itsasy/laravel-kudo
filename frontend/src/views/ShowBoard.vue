@@ -9,7 +9,7 @@
 <script>
 
 import Navigation from "../components/Navigation";
-import ShowBoard from "../components/ShowBoard";
+import ShowBoard from "../components/Boards/ShowBoard";
 import Menu from "../components/Menu";
 
 export default {

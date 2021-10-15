@@ -22,7 +22,7 @@ const router = new VueRouter({
             component: Login
         },
         {
-            path: "/board",
+            path: "/board/:id",
             component: ShowBoard
         },
         {
