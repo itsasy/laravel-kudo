@@ -19,11 +19,13 @@
                 </v-btn>
 
 
-                <v-btn small outlined color="dark" v-else>
+                <v-btn small outlined color="dark" v-else
+                       @click.stop="CreateKudo=true">
                     <v-icon>mdi-plus</v-icon>
                     New Kudo
                 </v-btn>
                 <create-board v-model="CreateBoard"></create-board>
+                <create-kudo v-model="CreateKudo"></create-kudo>
 
             </v-col>
         </v-row>
@@ -33,16 +35,19 @@
 <script>
 
 import CreateBoard from "../Boards/CreateBoard";
+import CreateKudo from "../Kudos/CreateKudo";
 
 export default {
     name: "Menu",
     data() {
         return {
-            CreateBoard: false
+            CreateBoard: false,
+            CreateKudo: false,
         }
     },
     components: {
-        CreateBoard
+        CreateBoard,
+        CreateKudo
     }
 }
 </script>
