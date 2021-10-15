@@ -6,7 +6,7 @@ use App\Models\Worker;
 
 class WorkerController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
         $workers = Worker::all();
 

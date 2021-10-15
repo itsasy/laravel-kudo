@@ -15,8 +15,9 @@
                 <v-card-text>
                     <v-form class="pt-5">
                         <label>KudoBoard for:</label>
-                        <v-combobox v-model="boardForm.worker_id" :items="boardForm.workerList" dense filled rounded/>
-
+                        <v-select item-value="id" item-text="name" :items="boardForm.workerList"
+                                  v-model="boardForm.worker_id" label="Select" single-line
+                                  dense filled rounded></v-select>
                         <label>Description:</label>
                         <v-text-field dense filled rounded placeholder="" v-model="boardForm.description"/>
                     </v-form>
@@ -36,17 +37,18 @@
 <script>
 
 import BoardListService from '../../services/BoardServices';
+import WorkerService from "../../services/WorkerServices";
 
 export default {
     name: "CreateBoard",
     data() {
         return {
             boardService: new BoardListService,
-
+            workerService: new WorkerService,
             boardForm: {
-                workerList: [1, 2, 2,3],
+                workerList: [],
 
-                description: 'test',
+                description: '',
                 worker_id: ''
             }
         }
@@ -62,7 +64,18 @@ export default {
             }).catch(() => {
                 return Promise.resolve(false)
             })
+        },
+        getWorkers() {
+            let workerList = this.workerService.getWorkers()
+            workerList.then(response => {
+                this.boardForm.workerList = response.data.workers;
+            }).catch(error => {
+                console.log(error);
+            });
         }
+    },
+    created() {
+        this.getWorkers()
     }
 }
 </script>
