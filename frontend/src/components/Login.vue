@@ -12,15 +12,16 @@
                             <v-label for="username">
                                 Username
                             </v-label>
-                            <v-text-field dense filled rounded required id="username" type="text"/>
+                            <v-text-field dense filled rounded required id="username" type="text" v-model="user.email"/>
                             <v-label for="password">
                                 Password
                             </v-label>
-                            <v-text-field dense filled rounded required id="password" type="password"/>
+                            <v-text-field dense filled rounded required id="password" type="password"
+                                          v-model="user.password"/>
                         </v-form>
                     </v-card-text>
                     <v-card-actions class="d-flex flex-row-reverse">
-                        <v-btn type="submit" dark>Sign Up</v-btn>
+                        <v-btn dark depressed color="dark" @click.prevent="authentication">{{ loadingRequest ? '...Wait' : 'Sign in' }}</v-btn>
                     </v-card-actions>
                 </v-card>
             </div>
@@ -29,8 +30,31 @@
 </template>
 
 <script>
+
 export default {
     name: "Login"
+    , data() {
+        return {
+            user: {
+                email: null,
+                password: null
+            },
+            loadingRequest: false
+        }
+    },
+    methods: {
+        authentication() {
+            this.$store.dispatch('login', {
+                email: this.user.email,
+                password: this.user.password
+            }).then(() => {
+                console.log('holi')
+                this.$router.push('/')
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+    }
 }
 </script>
 
