@@ -24,4 +24,15 @@ export default class BoardList {
             })
         })
     }
+
+    boardPublications(board_id){
+        return new Promise((resolve,reject)=>{
+            axios.get('/board-publications/' + board_id)
+                .then(response=>{
+                    resolve(response)
+                }).catch(error =>{
+                    reject(error)
+            })
+        })
+    }
 }
