@@ -10,7 +10,7 @@ class BoardController extends Controller
 
     public function index()
     {
-        $boards = Board::all();
+        $boards = Board::all()->load('worker');
 
         return response()->json([
             'boards' => $boards,
