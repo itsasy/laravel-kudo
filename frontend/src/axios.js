@@ -15,7 +15,6 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use((response) => {
     return response
 }, (error) => {
-    console.log(error)
     if (error.response.status === 401) {
         store.commit({
             type: "logout"

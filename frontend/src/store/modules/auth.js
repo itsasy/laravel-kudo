@@ -18,15 +18,15 @@ const auth = {
         }
     },
     mutations: {
-        SET_TOKEN (state, token) {
+        SET_TOKEN(state, token) {
             state.token = token
             localStorage.setItem('kudoboard_user_token', state.token)
         },
-        SET_USER (state, user) {
+        SET_USER(state, user) {
             state.user = user
             localStorage.setItem('kudoboard_user', JSON.stringify(state.user))
         },
-        logout (state) {
+        logout(state) {
             state.user = null
             state.token = null
             localStorage.removeItem('kudoboard_user')
@@ -34,7 +34,7 @@ const auth = {
         }
     },
     actions: {
-        login({ commit }, user) {
+        login({commit}, user) {
             return new Promise((resolve, reject) => {
                 axios.post('/login', {
                     email: user.email,
@@ -53,7 +53,7 @@ const auth = {
                 })
             })
         },
-        register({ commit }, user) {
+        register({commit}, user) {
             return new Promise((resolve, reject) => {
                 axios.post('/register', {
                     name: user.name,
@@ -73,7 +73,7 @@ const auth = {
                 })
             })
         },
-        me({ commit }, token) {
+        me({commit}, token) {
             return new Promise((resolve, reject) => {
                 axios.post('/me', {})
                     .then(res => {
@@ -85,11 +85,11 @@ const auth = {
                 })
             })
         },
-        logout({ commit }) {
+        logout({commit}, token) {
             return new Promise((resolve, reject) => {
                 axios.post('/logout', {})
                     .then(res => {
-                        commit('logout')
+                        commit('logout', token)
                         resolve(res)
                     }).catch(err => {
                     reject(err)

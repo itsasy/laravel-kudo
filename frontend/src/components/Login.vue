@@ -48,7 +48,6 @@ export default {
                 email: this.user.email,
                 password: this.user.password
             }).then(() => {
-                console.log('holi')
                 this.$router.push('/')
             }).catch(err => {
                 console.log(err)

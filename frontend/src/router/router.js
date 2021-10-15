@@ -21,7 +21,7 @@ const router = new VueRouter({
             path: "/register",
             component: Register,
             meta: {
-                requiresAuth: true
+                requiresAuth: false
             }
         },
         {
@@ -44,21 +44,14 @@ const router = new VueRouter({
             meta: {
                 requiresAuth: true
             }
-        },
-        {
-            path: "/logout",
-            meta: {
-                requiresAuth: true
-            }
-        },
-
+        }
     ]
 })
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!store.getters.userToken) {
-            next({name: 'Login'})
+            next({path: '/login'})
         } else {
             next()
         }

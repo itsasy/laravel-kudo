@@ -3,23 +3,37 @@
         <v-toolbar-title class="">KudoBoard</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-            <v-btn v-for="item in menu" :key="item.icon" :to="item.link" link depressed>
-                {{ item.title }}
+            <v-btn link depressed
+                   v-if="this.$router.history.current.path === '/login'|| this.$router.history.current.path === '/register' " href="/login">
+                Login
+            </v-btn>
+            <v-btn link depressed
+                   v-if="this.$router.history.current.path === '/login' || this.$router.history.current.path === '/register'"
+                   href="/register">
+                Register
+            </v-btn>
+            <v-btn @click="logout()" link depressed v-else>
+                Logout
             </v-btn>
         </v-toolbar-items>
     </v-app-bar>
 </template>
 
 <script>
+
 export default {
-    data: () => ({
-        menu: [
-            {icon: "info", title: "Logout", link: 'logout'},
-        ]
-    }),
-    name: "Navigation"
-}
-;
+    name: "Navigation",
+    methods: {
+        logout() {
+            this.$store.dispatch('logout')
+                .then(() => {
+                    this.$router.push({path: '/login'})
+                }).catch(error => {
+                console.log(error)
+            })
+        }
+    }
+};
 </script>
 
 <style scoped>
