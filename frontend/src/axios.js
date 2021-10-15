@@ -3,7 +3,7 @@ import router from './router/router'
 import store from './store/store'
 
 const instance = axios.create({
-    baseURL: 'https://laravel-kudoboard.test/api'
+    baseURL: 'http://127.0.0.1:8000/api'
 })
 
 
