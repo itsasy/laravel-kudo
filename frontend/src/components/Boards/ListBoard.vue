@@ -69,7 +69,11 @@ export default {
             });
         }
     },
-
+    mounted() {
+        this.$root.$on('fetchBoardList', ()=>{
+            this.fetchBoardList()
+        })
+    }
 }
 </script>
 

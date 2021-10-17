@@ -62,7 +62,7 @@ export default {
                 user_id: this.kudoForm.user_id
             })
             create.then(() => {
-                this.$router.go(this.$router.currentRoute);
+                this.$root.$emit('fetchBoardPosts');
             }).catch(() => {
                 return Promise.resolve(false)
             })

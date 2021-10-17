@@ -69,7 +69,7 @@ export default {
                 worker_id: this.boardForm.worker_id
             })
             create.then(() => {
-                this.$router.go(this.$router.currentRoute);
+                this.$root.$emit('fetchBoardList');
             }).catch(() => {
                 return Promise.resolve(false)
             })

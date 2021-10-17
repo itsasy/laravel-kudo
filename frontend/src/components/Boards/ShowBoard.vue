@@ -47,6 +47,11 @@ export default {
             })
         },
     },
+    mounted() {
+        this.$root.$on('fetchBoardPosts', () => {
+            this.fetchBoardPosts()
+        })
+    }
 }
 </script>
 
