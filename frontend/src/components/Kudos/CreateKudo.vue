@@ -50,22 +50,26 @@ export default {
             kudoService: new KudoService(),
             kudoForm: {
                 description: '',
-                user_id: 1
+                user_id: this.$store.getters.user.id
             }
         }
     },
     methods: {
         createBoard() {
-            let create = this.kudoService.createKudo({
-                description: this.kudoForm.description,
-                board_id: this.$route.params.id,
-                user_id: this.kudoForm.user_id
-            })
-            create.then(() => {
-                this.$root.$emit('fetchBoardPosts');
-            }).catch(() => {
-                return Promise.resolve(false)
-            })
+            if (this.kudoForm.description === '') {
+                console.log('error');
+            } else {
+                let create = this.kudoService.createKudo({
+                    description: this.kudoForm.description,
+                    board_id: this.$route.params.id,
+                    user_id: this.kudoForm.user_id
+                })
+                create.then(() => {
+                    this.$root.$emit('fetchBoardPosts');
+                    this.modal = false
+                    this.kudoForm.description = ''
+                })
+            }
         }
     }
 }

@@ -64,15 +64,22 @@ export default {
     },
     methods: {
         createBoard() {
-            let create = this.boardService.createBoard({
-                description: this.boardForm.description,
-                worker_id: this.boardForm.worker_id
-            })
-            create.then(() => {
-                this.$root.$emit('fetchBoardList');
-            }).catch(() => {
-                return Promise.resolve(false)
-            })
+            if (this.boardForm.description === '' || this.boardForm.worker_id === 0) {
+                console.log('error');
+            } else {
+                let create = this.boardService.createBoard({
+                    description: this.boardForm.description,
+                    worker_id: this.boardForm.worker_id
+                })
+                create.then((response) => {
+                    if (response.data.message === 'Has been created') {
+                        this.$root.$emit('fetchBoardList');
+                        this.modal = false
+                        this.boardForm.description = ''
+                        this.boardForm.worker_id = 0
+                    }
+                })
+            }
         },
         getWorkers() {
             let workerList = this.workerService.getWorkers()
