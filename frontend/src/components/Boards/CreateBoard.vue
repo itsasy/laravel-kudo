@@ -1,5 +1,11 @@
 <template>
     <v-dialog v-model="modal" persistent max-width="550px" scrollable>
+        <alert
+            :dialog="alert.dialog"
+            :tipo="alert.tipo"
+            :mensaje="alert.mensaje"
+            @close="alert.dialog = false"
+        />
         <v-card>
             <v-toolbar dark class="pa-0">
                 <v-toolbar-title>New KudoBoard</v-toolbar-title>
@@ -34,11 +40,19 @@
 
 import BoardListService from '../../services/BoardServices';
 import WorkerService from "../../services/WorkerServices";
+import alert from "../Helpers/alert";
 
 export default {
+    components: {
+        alert
+    },
     name: "CreateBoard",
     props: {
-        value: Boolean
+        value: Boolean,
+        dialog: {
+            type: Boolean,
+            default: false
+        }
     },
     computed: {
         modal: {
@@ -59,20 +73,37 @@ export default {
 
                 description: '',
                 worker_id: ''
+            },
+            alert: {
+                dialog: false,
+                tipo: "success",
+                mensaje: "asd"
             }
         }
     },
     methods: {
         createBoard() {
-            let create = this.boardService.createBoard({
-                description: this.boardForm.description,
-                worker_id: this.boardForm.worker_id
-            })
-            create.then(() => {
-                this.$router.go(this.$router.currentRoute);
-            }).catch(() => {
-                return Promise.resolve(false)
-            })
+            if (this.boardForm.description === '' || this.boardForm.worker_id === 0) {
+                this.alert.tipo = "warning";
+                this.alert.mensaje = "Empty fields!";
+                this.alert.dialog = true;
+            } else {
+                let create = this.boardService.createBoard({
+                    description: this.boardForm.description,
+                    worker_id: this.boardForm.worker_id
+                })
+                create.then((response) => {
+                    if (response.data.message === 'Has been created') {
+                        this.$root.$emit('fetchBoardList');
+                        this.modal = false
+                        this.boardForm.description = ''
+                        this.boardForm.worker_id = 0
+                        this.alert.tipo = 'success';
+                        this.alert.mensaje = response.data.message;
+                        this.alert.dialog = true;
+                    }
+                })
+            }
         },
         getWorkers() {
             let workerList = this.workerService.getWorkers()

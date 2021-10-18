@@ -15,7 +15,7 @@
                         </v-row>
                     </v-card-text>
                     <v-card-text class="d-flex flex-row-reverse">
-                        From: {{ element.user_id }}
+                        <strong>From: {{ element.publisher.name }}</strong>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -47,6 +47,11 @@ export default {
             })
         },
     },
+    mounted() {
+        this.$root.$on('fetchBoardPosts', () => {
+            this.fetchBoardPosts()
+        })
+    }
 }
 </script>
 

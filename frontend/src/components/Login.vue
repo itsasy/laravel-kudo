@@ -2,6 +2,12 @@
     <v-main class="container">
         <v-row class="justify-content-center mt-4">
             <div class="col-md-5 col-sm-8">
+                <alert
+                    :dialog="alert.dialog"
+                    :tipo="alert.tipo"
+                    :mensaje="alert.mensaje"
+                    @close="alert.dialog = false"
+                />
                 <v-card>
                     <v-toolbar dark class="dark">
                         <v-toolbar-title>Login</v-toolbar-title>
@@ -21,7 +27,9 @@
                         </v-form>
                     </v-card-text>
                     <v-card-actions class="d-flex flex-row-reverse">
-                        <v-btn dark depressed color="dark" @click.prevent="authentication">{{ loadingRequest ? '...Wait' : 'Sign in' }}</v-btn>
+                        <v-btn dark depressed color="dark" @click="authentication">
+                            Sign in
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
             </div>
@@ -31,7 +39,12 @@
 
 <script>
 
+import alert from "./Helpers/alert";
+
 export default {
+    components: {
+        alert
+    },
     name: "Login"
     , data() {
         return {
@@ -39,19 +52,32 @@ export default {
                 email: null,
                 password: null
             },
-            loadingRequest: false
+            alert: {
+                dialog: false,
+                tipo: "success",
+                mensaje: "asd"
+            }
+        }
+    }, props: {
+        dialog: {
+            type: Boolean,
+            default: false
         }
     },
     methods: {
         authentication() {
-            this.$store.dispatch('login', {
-                email: this.user.email,
-                password: this.user.password
-            }).then(() => {
-                this.$router.push('/')
-            }).catch(err => {
-                console.log(err)
-            })
+            if (this.user.email === '' || this.user.password === '') {
+                this.alert.tipo = "warning";
+                this.alert.mensaje = "Empty fields!";
+                this.alert.dialog = true;
+            } else {
+                this.$store.dispatch('login', {
+                    email: this.user.email,
+                    password: this.user.password
+                }).then(() => {
+                    this.$router.push('/')
+                })
+            }
         }
     }
 }

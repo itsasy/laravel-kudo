@@ -1,5 +1,11 @@
 <template>
     <v-dialog v-model="modal" persistent max-width="550px" scrollable>
+        <alert
+            :dialog="alert.dialog"
+            :tipo="alert.tipo"
+            :mensaje="alert.mensaje"
+            @close="alert.dialog = false"
+        />
         <v-card>
             <v-toolbar dark class="pa-0">
                 <v-toolbar-title>New Kudo</v-toolbar-title>
@@ -29,11 +35,19 @@
 <script>
 
 import KudoService from "../../services/KudoServices";
+import alert from "../Helpers/alert";
 
 export default {
+    components: {
+        alert
+    },
     name: "CreateKudo",
     props: {
-        value: Boolean
+        value: Boolean,
+        dialog: {
+            type: Boolean,
+            default: false
+        }
     },
     computed: {
         modal: {
@@ -50,22 +64,38 @@ export default {
             kudoService: new KudoService(),
             kudoForm: {
                 description: '',
-                user_id: 1
+                user_id: this.$store.getters.user.id,
+            },
+            alert: {
+                dialog: false,
+                tipo: "success",
+                mensaje: "asd"
             }
         }
     },
     methods: {
         createBoard() {
-            let create = this.kudoService.createKudo({
-                description: this.kudoForm.description,
-                board_id: this.$route.params.id,
-                user_id: this.kudoForm.user_id
-            })
-            create.then(() => {
-                this.$router.go(this.$router.currentRoute);
-            }).catch(() => {
-                return Promise.resolve(false)
-            })
+            if (this.kudoForm.description === '') {
+                this.alert.tipo = "warning";
+                this.alert.mensaje = "Empty fields!";
+                this.alert.dialog = true;
+            } else {
+                let create = this.kudoService.createKudo({
+                    description: this.kudoForm.description,
+                    board_id: this.$route.params.id,
+                    user_id: this.kudoForm.user_id
+                })
+                create.then((response) => {
+                    if (response.data.message === 'Has been created') {
+                        this.$root.$emit('fetchBoardPosts');
+                        this.modal = false
+                        this.kudoForm.description = ''
+                        this.alert.tipo = 'success';
+                        this.alert.mensaje = response.data.message;
+                        this.alert.dialog = true;
+                    }
+                })
+            }
         }
     }
 }
