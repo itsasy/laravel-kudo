@@ -11,7 +11,7 @@ class PublicationController extends Controller
 
     public function show(Board $board)
     {
-        $publications = Publication::where('board_id', $board->id)->get();
+        $publications = Publication::where('board_id', $board->id)->with('publisher')->get();
 
         return response()->json([
             'publications' => $publications,
