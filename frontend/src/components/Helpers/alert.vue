@@ -35,7 +35,7 @@ export default {
   computed: {
     alert() {
       //PREGUNTA SI EL MODAL ESTA ABIERTO PARA CERRARLO DESPUES DE 1 SEGUNDO.
-      if (this.dialog == true) {
+      if (this.dialog === true) {
         setTimeout(() => {
           this.$emit("close");
         }, 2000);
