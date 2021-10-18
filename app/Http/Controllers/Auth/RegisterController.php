@@ -29,7 +29,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
-            'password' => $request['password'],
+            'password' => \Hash::make($request['password']),
         ]);
 
         return response()->json($user);

@@ -41,10 +41,6 @@ class AuthController extends Controller
             return response()->json(['The credentials are not correct. Try again.'], 401);
         }
 
-        if (!$request->user()->hasVerifiedEmail()) {
-            return response()->json(['Your account is not verified. Please try again.'], 401);
-        }
-
         return $this->respondWithToken($request->user(), $token);
     }
 
