@@ -23,6 +23,6 @@ class Publication extends Model
 
     public function publisher()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
